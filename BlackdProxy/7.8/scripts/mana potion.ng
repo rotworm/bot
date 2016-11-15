@@ -1,0 +1,14 @@
+const
+minMana =4500;
+
+
+while not Terminated do
+begin
+UpdateWorld;
+if (Self.Mana < minMana) then
+begin
+Self.Containers.UseItemWithSelf(3171);// SE VC QUER USAR OUTRA mana troque o id aki mana pequena
+Sleep(1000);
+end;
+Sleep(100);
+end;

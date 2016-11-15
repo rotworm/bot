@@ -1,0 +1,28 @@
+Const
+PlayerName = 'Dragon Lord' // The player to keep attacking.
+
+function Attacking : boolean;
+var x : integer;
+begin
+Result := False;
+for x := 0 to Creatures.Count - 1 do
+begin
+if x >= Creatures.Count then Break;
+if Creatures.Creature[x].Attacking then
+begin
+Result := True;
+Exit;
+end;
+end;
+end;
+While not terminated do
+begin
+UpdateWorld;
+for i:= 0 to Creatures.Count - 1 do
+begin
+If (Creatures.Creature[i].Name = PlayerName) and (not attacking)
+then Creatures.Creature[i].Attacking := True;
+sleep(100);
+end;
+sleep(100);
+end;

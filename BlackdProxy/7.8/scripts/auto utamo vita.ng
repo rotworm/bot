@@ -1,0 +1,10 @@
+while not terminated do
+begin
+UpdateWorld;
+if not Self.MagicShield then
+begin
+Self.Say('Utamo Vita');
+Sleep(2000);
+end;
+sleep(100);
+end;
