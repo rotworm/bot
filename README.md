@@ -1,2 +1,2 @@
-# bot
-Collection of Tibia bots.
+# Bot
+Collection of Open Tibia Server bots.
