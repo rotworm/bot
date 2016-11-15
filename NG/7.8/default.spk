@@ -1,0 +1,61 @@
+; The responder system is based on levels and pattern matching. Each time a person says
+; something that matches a pattern the bot will reply and change the users level. This
+; allows the responder to base responses on what the user has said previously.
+;
+; The format is "Operation | Level Required | Level Gained | Pattern | Possible Responses
+;
+; Operations:
+;
+;   == equal to
+;   << less than
+;   >> greater than
+;   <= less than or equal to
+;   >= greater than or equal to
+;   != does not equal
+;   ** allow any level
+;
+; Pattern:
+;
+;    The pattern is a regular expression. Compatiable with the Perl format. For more
+;    complete documentation on the regular expression please consult the manual or
+;    visit http://www.regular-expressions.info/tutorial.html for a tutorial.
+;
+;    "\Ax" matches any message that begins with "x"
+;    "hi|bye" matches "hi", "high", "bye" and "goodbye"
+;    "." matches any character
+;
+; Levels:
+;
+;   Each player begins with a level of 0. Based on what is said, the response system
+;   can raise or lower a player's level. The operation depends on how the level of the
+;   player is compared to the required level of the response.
+
+
+; Be careful with your changes. A mistake could cause the bot to crash. Make sure you
+; follow this example's format exactly! All lines that begin with ; are comments!
+
+;---BEGIN EXAMPLE SCRIPT---
+
+;Treat anything said by someone with no level, that begins with an "h", as a greeting.
+;Reply with your own and raise the level to 1
+
+== 0 1 "\Ah" "hello", "hey", "hi", "howdy"
+
+;If we've already greeted them once (level = 1) then we will act annoyed.
+;Reply and raise the level to 2
+
+== 1 2 "\Ah" "I said hello...", "what's your problem?", "ignored", "bye", "I'm busy"
+
+;These are replies for cheating and cave hunt words. 
+;Reply and raise the level to 3
+
+<= 2 3 "stop|mine|no|help" "sorry", "oops", "np", "ok", "cool"
+<= 2 3 "bot|cheat|hack|macro|leave|go" "no", "lol", "wtf", "wrong", "stfu", "ignored"
+
+;Now we have 2 more levels of text trying to get rid of the person.
+;When level 5 is reached there are no more possible replies and they are ignored.
+
+== 3 4 "." "...", "whatever", ":(", "omg", "what?"
+== 4 5 "." "ok bye", "uhm... no", "leave me alone", "cya"
+
+;---END EXAMPLE SCRIPT---
